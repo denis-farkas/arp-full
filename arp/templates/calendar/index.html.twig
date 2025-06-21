@@ -185,15 +185,29 @@ document.addEventListener('turbo:load', function() {
 function checkExistingBooking() {
     const existingBooking = localStorage.getItem('rdv_booking_token');
     if (existingBooking) {
-        const bookingData = JSON.parse(existingBooking);
-        const bookingDate = new Date(bookingData.date);
-        const now = new Date();
-        
-        // Check if booking is still valid (in the future)
-        if (bookingDate > now) {
-            showExistingBookingAlert(bookingData);
-        } else {
-            // Remove expired booking
+        try {
+            // Try to parse as JSON
+            const bookingData = JSON.parse(existingBooking);
+            
+            // Validate that bookingData has the expected structure
+            if (bookingData && bookingData.date) {
+                const bookingDate = new Date(bookingData.date);
+                const now = new Date();
+                
+                // Check if booking is still valid (in the future)
+                if (bookingDate > now) {
+                    showExistingBookingAlert(bookingData);
+                } else {
+                    // Remove expired booking
+                    localStorage.removeItem('rdv_booking_token');
+                }
+            } else {
+                // Invalid data structure, remove it
+                localStorage.removeItem('rdv_booking_token');
+            }
+        } catch (error) {
+            // Not valid JSON, clear it
+            console.error('Invalid booking data in localStorage:', error);
             localStorage.removeItem('rdv_booking_token');
         }
     }
