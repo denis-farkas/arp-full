@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation de réservation{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4><i class="fas fa-calendar-check"></i> Résumé de votre réservation</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Étape de confirmation</strong>
+                        <br><small>Vérifiez les détails de votre réservation avant de procéder au paiement</small>
+                    </div>
+                    
+                    <h5>Détails de votre rendez-vous:</h5>
+                    <ul class="list-unstyled">
+                        <li><strong>Nom:</strong> {{ pendingRdv.client_surname }}</li>
+                        <li><strong>Type:</strong> {{ rdv.name }}</li>
+                        <li><strong>Date et heure:</strong> {{ pendingRdv.begin_at|date('d/m/Y à H:i') }}</li>
+                        <li><strong>Durée:</strong> {{ pendingRdv.duration }} minutes</li>
+                        <li><strong>Prix:</strong> {{ pendingRdv.price }}€</li>
+                        <li><strong>Statut:</strong> 
+                            <span class="badge bg-warning">En attente de paiement</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="mt-4">
+                        <a href="{{ path('calendar') }}" class="btn btn-secondary">Modifier</a>
+                        <a href="{{ path('payment_process')}}" class="btn btn-primary">Procéder au paiement</a>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <small class="text-muted">
+                            <i class="fas fa-shield-alt"></i>
+                            Cette réservation est anonyme et confidentielle. 
+                            Seules les informations nécessaires au service sont conservées.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

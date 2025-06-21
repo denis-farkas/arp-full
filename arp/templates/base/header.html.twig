@@ -1,0 +1,321 @@
+{# templates/base/header.html.twig #}
+<nav class="navbar navbar-expand-lg bg-white">
+    <div class="container mx-auto" style="max-width: 1440px">
+        <a class="navbar-brand" href="{{ path('app_home') }}">
+            <img class="logo" src="/build/images/logo1.png" alt="BenOps" />
+        </a>
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarColor04"
+            aria-controls="navbarColor04"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor04">
+            <ul class="navbar-nav w-100 ms-auto justify-content-between">
+                {# ACCUEIL #}
+                <li class="nav-item">
+                    <a 
+                        class="nav-link {% if app.request.get('_route') == 'app_home' %}active{% endif %}"
+                        href="{{ path('app_home') }}"
+                        {% if app.request.get('_route') == 'app_home' %}style="color: #FF6B00;"{% endif %}
+                    >
+                        ACCUEIL
+                    </a>
+                </li>
+
+                {# LE CABINET #}
+                <li class="nav-item">
+                    <a 
+                        class="nav-link {% if app.request.get('_route') == 'app_cabinet' %}active{% endif %}"
+                        href="{{ path('app_cabinet') }}"
+                        {% if app.request.get('_route') == 'app_cabinet' %}style="color: #FF6B00;"{% endif %}
+                    >
+                        LE CABINET
+                    </a>
+                </li>
+
+                {# PARTICULIERS - Dropdown #}
+                <li class="nav-item dropdown">
+                    {% set particuliersActive = app.request.get('_route') in ['app_divorce', 'app_garde', 'app_pension', 'app_travail', 'app_moral', 'app_solvable', 'app_disparue'] %}
+                    <a 
+                        class="nav-link dropdown-toggle {% if particuliersActive %}active{% endif %}"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        {% if particuliersActive %}style="color: #FF6B00;"{% endif %}
+                    >
+                        PARTICULIERS
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="row">
+                            <div class="col">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <a 
+                                            class="dropdown-item {% if app.request.get('_route') == 'app_divorce' %}active{% endif %}"
+                                            href="{{ path('app_divorce') }}"
+                                            {% if app.request.get('_route') == 'app_divorce' %}style="color: #FF6B00;"{% endif %}
+                                        >
+                                            Divorce conflictuel
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a 
+                                            class="dropdown-item {% if app.request.get('_route') == 'app_garde' %}active{% endif %}"
+                                            href="{{ path('app_garde') }}"
+                                            {% if app.request.get('_route') == 'app_garde' %}style="color: #FF6B00;"{% endif %}
+                                        >
+                                            Garde d'enfant
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a 
+                                            class="dropdown-item {% if app.request.get('_route') == 'app_pension' %}active{% endif %}"
+                                            href="{{ path('app_pension') }}"
+                                            {% if app.request.get('_route') == 'app_pension' %}style="color: #FF6B00;"{% endif %}
+                                        >
+                                            Pension alimentaire
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <a 
+                                            class="dropdown-item {% if app.request.get('_route') == 'app_travail' %}active{% endif %}"
+                                            href="{{ path('app_travail') }}"
+                                            {% if app.request.get('_route') == 'app_travail' %}style="color: #FF6B00;"{% endif %}
+                                        >
+                                            Violations du droit du travail
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a 
+                                            class="dropdown-item {% if app.request.get('_route') == 'app_moral' %}active{% endif %}"
+                                            href="{{ path('app_moral') }}"
+                                            {% if app.request.get('_route') == 'app_moral' %}style="color: #FF6B00;"{% endif %}
+                                        >
+                                            Enquête de moralité
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a 
+                                            class="dropdown-item {% if app.request.get('_route') == 'app_solvable' %}active{% endif %}"
+                                            href="{{ path('app_solvable') }}"
+                                            {% if app.request.get('_route') == 'app_solvable' %}style="color: #FF6B00;"{% endif %}
+                                        >
+                                            Enquête de solvabilité
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <a 
+                                            class="dropdown-item {% if app.request.get('_route') == 'app_disparue' %}active{% endif %}"
+                                            href="{{ path('app_disparue') }}"
+                                            {% if app.request.get('_route') == 'app_disparue' %}style="color: #FF6B00;"{% endif %}
+                                        >
+                                            Personnes disparues ou introuvables
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                {# ENTREPRISES - Dropdown #}
+                <li class="nav-item dropdown">
+                    {% set entreprisesActive = app.request.get('_route') in ['app_antecedent', 'app_maladie', 'app_concurrence', 'app_personnel', 'app_vols', 'app_mystere', 'app_espion', 'app_securite'] %}
+                    <a 
+                        class="nav-link dropdown-toggle {% if entreprisesActive %}active{% endif %}"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        {% if entreprisesActive %}style="color: #FF6B00;"{% endif %}
+                    >
+                        ENTREPRISES
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="row">
+                            <div class="col">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <a 
+                                            class="dropdown-item {% if app.request.get('_route') == 'app_antecedent' %}active{% endif %}"
+                                            href="{{ path('app_antecedent') }}"
+                                            {% if app.request.get('_route') == 'app_antecedent' %}style="color: #FF6B00;"{% endif %}
+                                        >
+                                            Analyse des antécédents
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a 
+                                            class="dropdown-item {% if app.request.get('_route') == 'app_maladie' %}active{% endif %}"
+                                            href="{{ path('app_maladie') }}"
+                                            {% if app.request.get('_route') == 'app_maladie' %}style="color: #FF6B00;"{% endif %}
+                                        >
+                                            Suspicion d'arrêt maladie abusif
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a 
+                                            class="dropdown-item {% if app.request.get('_route') == 'app_concurrence' %}active{% endif %}"
+                                            href="{{ path('app_concurrence') }}"
+                                            {% if app.request.get('_route') == 'app_concurrence' %}style="color: #FF6B00;"{% endif %}
+                                        >
+                                            Détection de concurrence déloyale
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <a 
+                                            class="dropdown-item {% if app.request.get('_route') == 'app_personnel' %}active{% endif %}"
+                                            href="{{ path('app_personnel') }}"
+                                            {% if app.request.get('_route') == 'app_personnel' %}style="color: #FF6B00;"{% endif %}
+                                        >
+                                            Suspicion du personnel
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a 
+                                            class="dropdown-item {% if app.request.get('_route') == 'app_vols' %}active{% endif %}"
+                                            href="{{ path('app_vols') }}"
+                                            {% if app.request.get('_route') == 'app_vols' %}style="color: #FF6B00;"{% endif %}
+                                        >
+                                            Détection des vols internes
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a 
+                                            class="dropdown-item {% if app.request.get('_route') == 'app_mystere' %}active{% endif %}"
+                                            href="{{ path('app_mystere') }}"
+                                            {% if app.request.get('_route') == 'app_mystere' %}style="color: #FF6B00;"{% endif %}
+                                        >
+                                            Opérations de client mystère
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <a 
+                                            class="dropdown-item {% if app.request.get('_route') == 'app_espion' %}active{% endif %}"
+                                            href="{{ path('app_espion') }}"
+                                            {% if app.request.get('_route') == 'app_espion' %}style="color: #FF6B00;"{% endif %}
+                                        >
+                                            Protection contre l'espionnage industriel
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a 
+                                            class="dropdown-item {% if app.request.get('_route') == 'app_securite' %}active{% endif %}"
+                                            href="{{ path('app_securite') }}"
+                                            {% if app.request.get('_route') == 'app_securite' %}style="color: #FF6B00;"{% endif %}
+                                        >
+                                            Conseils en sécurité
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                {# TARIFS #}
+                <li class="nav-item">
+                    <a 
+                        class="nav-link {% if app.request.get('_route') == 'app_tarif' %}active{% endif %}"
+                        href="{{ path('app_tarif') }}"
+                        {% if app.request.get('_route') == 'app_tarif' %}style="color: #FF6B00;"{% endif %}
+                    >
+                        TARIFS
+                    </a>
+                </li>
+
+                {# CONTACTS #}
+                <li class="nav-item">
+                    <a 
+                        class="nav-link {% if app.request.get('_route') == 'app_contact' %}active{% endif %}"
+                        href="{{ path('app_contact') }}"
+                        {% if app.request.get('_route') == 'app_contact' %}style="color: #FF6B00;"{% endif %}
+                    >
+                        CONTACTS
+                    </a>
+                </li>
+
+                {# ARTICLES #}
+                <li class="nav-item">
+                    <a 
+                        class="nav-link {% if app.request.get('_route') == 'app_article' %}active{% endif %}"
+                        href="{{ path('app_article') }}"
+                        {% if app.request.get('_route') == 'app_article' %}style="color: #FF6B00;"{% endif %}
+                    >
+                        ARTICLES
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<style>
+    .dropdown-menu {
+        border: none;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 0;
+        padding: 20px;
+        margin-top: 0;
+        
+        /* Full width calculation */
+        width: 60vw;
+        left: calc(-30vw + 50%);
+    }
+    
+    .navbar-nav .nav-link {
+        font-weight: 500;
+    }
+    
+    .navbar-nav .nav-link.active,
+    .dropdown-item.active {
+        background-color: transparent;
+        color: #FF6B00 !important;
+    }
+    
+    .dropdown-menu .row {
+        width: 90%;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    @media (max-width: 992px) {
+        .dropdown-menu {
+            width: auto;
+            left: auto;
+        }
+        
+        .dropdown-menu .row {
+            display: block;
+            max-width: none;
+        }
+        
+        .dropdown-menu .col {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+    }
+</style>

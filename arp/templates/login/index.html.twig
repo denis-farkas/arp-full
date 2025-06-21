@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LoginController!{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+{% if error %}
+        <div class="login-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    <div class="container form-container">
+    <div class="col-md-6 offset-md-3 form-wrapper">
+        <h1 class="text-center mb-4">Connexion</h1>
+        
+        <form action="{{ path('app_login') }}" method="post">
+            <div class="mb-3">
+                <label for="username" class="form-label">Adresse e-mail:</label>
+                <input class="form-control" type="text" id="username" placeholder="Saisir votre Email" name="_username" value="{{ last_username }}">
+            </div>
+            
+            <div class="mb-3">
+                <label for="password" class="form-label">Mot de passe:</label>
+                <input type="password" class="form-control" id="password" name="_password" placeholder="Saisir votre mot de passe">
+            </div>
+            
+            {# Conditionally set the _target_path hidden input field #}
+            {% set targetPath = app.session.get('_security.main.target_path') %}
+            <input type="hidden" name="_target_path" value="{{ targetPath ?: path('app_account') }}"> 
+
+            <button type="submit" class="btn btn-primary btn-inscrire">Se connecter</button>
+        </form>         
+    </div>
+</div>
+
+{% endblock %}

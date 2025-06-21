@@ -1,0 +1,55 @@
+<!-- filepath: c:\Users\denis\Desktop\arp-full\arp\templates\base\footer.html.twig -->
+<footer class="bg-light py-3 mt-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <p class="mb-0 text-muted">
+                    &copy; {{ "now"|date("Y") }} ARP - Tous droits réservés
+                </p>
+            </div>
+            <div class="col-md-6 text-end">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('app_account') }}" class="btn btn-sm btn-outline-secondary">
+                        <i class="fas fa-cog"></i> Administration
+                    </a>
+                    <br />
+                    <a href="{{ path('app_logout') }}" class="btn btn-sm btn-outline-danger">
+                        <i class="fas fa-sign-out-alt"></i> Déconnexion
+                    </a>
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="btn btn-sm btn-outline-light text-muted border-0" style="font-size: 0.8rem;">
+                        <i class="fas fa-user"></i>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+    footer {
+        border-top: 1px solid #e9ecef;
+    }
+    
+    footer .btn-outline-light {
+        opacity: 0.5;
+        transition: opacity 0.3s ease;
+    }
+    
+    footer .btn-outline-light:hover {
+        opacity: 1;
+        color: #6c757d;
+        border-color: #6c757d;
+    }
+    
+    /* Ensure footer stays at bottom */
+    body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    main {
+        flex: 1;
+    }
+</style>

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="account-container">
+    <h1 class="text-center mb-4">Mon compte</h1>
+    
+    <div class="row">
+        <!-- Personal Information Card -->
+        <div class="col-lg-6 mb-4 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">Mes informations Administrateur</h4>
+                </div>
+                <div class="card-body">
+                    <div class="mb-2">
+                        <span class="data-label">Email:</span> {{ app.user.email }}
+                    </div>
+                    
+                    {% if app.user.roles[0] == 'ROLE_ADMIN' %}
+                    <div class="mt-4">
+                        <a href="{{ path('admin')}}" class="btn btn-custom-primary">
+                            <i class="fas fa-cogs me-2"></i>Administration
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="card-footer bg-white">
+                    <div class="d-flex flex-wrap justify-content-evenly w-100">
+                        <a href="{{ path('app_account_modify_pwd') }}" class="btn btn-outline-primary mb-2 mb-md-0">
+                            <i class="fas fa-key me-2"></i>Modifier mot de passe
+                        </a>
+                        <a href="{{ path('app_logout') }}" class="btn btn-outline-danger">
+                            <i class="fas fa-sign-out-alt me-2"></i>Déconnexion
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+</div>
+{% endblock %}
+
+

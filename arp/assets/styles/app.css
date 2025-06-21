@@ -1,0 +1,311 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2 {
+  font-family: Open Sans Condensed, sans-serif;
+}
+
+.orange {
+  color: #e7581a;
+}
+
+.bleue {
+  color: #00437a;
+}
+
+/* style de l'ancien composant react */
+
+.navbar-nav .nav-link {
+  font-weight: 500;
+}
+
+.navbar-nav .nav-link.active,
+.dropdown-item.active {
+  color: #ff6b00 !important;
+  background-color: transparent;
+}
+
+.dropdown-menu {
+  border: none;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  width: 100%;
+  left: 0;
+  padding: 20px;
+}
+
+/* Style pour les colonnes dans les menus déroulants */
+.dropdown-menu .row {
+  width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .dropdown-menu {
+    width: auto;
+    left: auto;
+  }
+
+  .dropdown-menu .row {
+    display: block;
+  }
+
+  .dropdown-menu .col {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+}
+
+nav .logo {
+  width: 120px;
+  height: auto;
+}
+
+a.nav-link {
+  color: #00437a;
+  font-weight: bold;
+}
+
+.nav-link:visited {
+  color: #00437a !important;
+}
+
+a.nav-link.active-link,
+a.nav-link.active-link:visited {
+  color: #e7581a !important;
+}
+
+.nav-link:hover {
+  color: #e7581a;
+}
+
+.nav-link:visited:hover {
+  color: #e7581a !important;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Custom dropdown menu styles */
+
+.custom-dropdown-menu {
+  display: none; /* Initially hidden */
+
+  position: absolute;
+
+  top: calc(100% + 1px); /* Position it below the navbar */
+
+  left: 0;
+
+  width: 100vw; /* Full width of the viewport */
+
+  background-color: black; /* Black background */
+
+  color: white; /* White text */
+
+  border: none; /* No border */
+
+  border-radius: 0; /* No border radius */
+
+  padding: 1rem; /* Padding for spacing */
+
+  z-index: 1050; /* Ensure it appears above other elements */
+
+  list-style-type: none; /* Remove default list styles */
+
+  margin: 0; /* Remove default margin */
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
+
+  transition: all 0.3s ease; /* Smooth transition for dropdown */
+
+  gap: 1rem;
+}
+
+/* Show the dropdown menu when active */
+
+.custom-dropdown-menu.active {
+  display: flex;
+}
+
+/* Style dropdown items */
+
+.custom-dropdown-menu .dropdown-item {
+  color: white;
+}
+
+.custom-dropdown-menu .dropdown-item:hover,
+.custom-dropdown-menu .dropdown-item:focus {
+  background-color: rgba(255, 255, 255, 0.1); /* Hover effect */
+
+  color: white;
+}
+
+/* Optional: Style the dropdown divider */
+
+.custom-dropdown-menu .dropdown-divider {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Triangle blanc orienté vers le bas, attaché au <li> activé */
+
+.navbar-nav .nav-item.active::after {
+  content: ""; /* Triangle vide */
+
+  position: absolute;
+
+  bottom: 0; /* Positionné à la limite inférieure du <li> */
+
+  left: 50%; /* Centré par rapport au <li> */
+
+  transform: translateX(-50%); /* Ajustement pour centrer */
+
+  border-left: 10px solid transparent; /* Côté gauche du triangle */
+
+  border-right: 10px solid transparent; /* Côté droit du triangle */
+
+  border-top: 10px solid white; /* Côté supérieur du triangle (orienté vers le bas) */
+
+  z-index: 1060; /* Au-dessus de la barre de navigation */
+}
+
+/* Assurez-vous que le <li> activé est positionné relativement */
+
+.navbar-nav .nav-item {
+  position: relative; /* Nécessaire pour positionner le triangle par rapport au <li> */
+}
+
+#presentation {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 300px;
+}
+
+.presentation-text {
+  color: #c08808;
+  width: 100%;
+  font-size: 1rem;
+  font-style: italic;
+  text-align: center;
+  font-weight: bold;
+  padding: 5px 0;
+}
+
+#presentation::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../images/Paris_banner1.png") center/cover;
+  opacity: 0;
+  transition: opacity 4s ease;
+  filter: brightness(1.3); /* makes the overlay version brighter */
+}
+
+#presentation:hover::after {
+  opacity: 1;
+}
+
+@keyframes slideFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.slide-left {
+  animation: slideFromLeft 0.8s ease-out forwards;
+  will-change: transform;
+  transform: translateZ(0);
+}
+/* Variantes avec délais */
+.slide-left-delay-1 {
+  animation: slideFromLeft 0.8s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.slide-left-delay-2 {
+  animation: slideFromLeft 0.8s ease-out 0.4s forwards;
+  opacity: 0;
+}
+
+.titre-description {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.txt-description {
+  width: 90%;
+  margin-bottom: 20px;
+}
+
+.img-description {
+  height: auto;
+  width: 100%;
+}
+
+@media (max-width: 575.98px) {
+  #right {
+    align-items: center !important;
+  }
+}
+
+#description {
+  width: 95%;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+#services {
+  background-color: #00437adf;
+  width: 95%;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  margin: 0 auto;
+}
+
+.titre-services {
+  font-weight: bold;
+}
+
+.txt-services {
+}
+
+.img-services {
+  width: 125px;
+  height: auto;
+}
+
+.card-services {
+  border-radius: 10px;
+  background-color: white;
+  padding: 20px;
+  margin: 50px;
+  height: 350px;
+  min-width: 300px;
+}
+
+.link-services {
+  color: #e7581a;
+}
+
+#services a {
+  text-decoration: none;
+}
+
+.title-services {
+  width: 100%;
+  color: white;
+  text-align: center;
+  padding: 30px 10px;
+  font-weight: bold;
+}

@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css?family=Muli:400,900&display=swap");
+
+#calendar-holder {
+  margin: 20px auto;
+  max-width: 900px;
+}
+
+.calendar-legend {
+  text-align: center;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.color-box {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  border-radius: 3px;
+}
+
+.user-course {
+  font-weight: bold !important;
+  border-width: 2px !important;
+}
+
+/* Make the calendar responsive */
+@media (max-width: 768px) {
+  .fc .fc-toolbar {
+    flex-direction: column;
+  }
+
+  .fc .fc-toolbar-title {
+    font-size: 1.2em;
+    margin: 10px 0;
+  }
+}

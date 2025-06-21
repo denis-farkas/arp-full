@@ -1,0 +1,164 @@
+{# filepath: c:\Users\denis\Desktop\arp-full\arp\templates\contact\index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Contactez-nous{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .contact-card {
+            height: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .contact-card-header {
+            padding: 2rem 1rem;
+            text-align: center;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+        }
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .contact-form label {
+            font-weight: 500;
+            margin-top: 1rem;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .section-divider {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+            margin: 1rem auto 2rem;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <div class="section-header">
+        <h1 class="display-4">Contactez-nous</h1>
+        <div class="section-divider"></div>
+        <p class="lead">Choisissez la méthode de contact qui vous convient le mieux</p>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <!-- Option 1: Formulaire de contact -->
+        <div class="col-md-4">
+            <div class="card contact-card shadow-sm">
+                <div class="contact-card-header">
+                    <i class="fas fa-envelope contact-icon"></i>
+                    <h3>Par email</h3>
+                </div>
+                <div class="card-body p-4">
+                    <p>Remplissez notre formulaire de contact et nous vous répondrons dans les meilleurs délais.</p>
+                    <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#contactFormModal">
+                        Envoyer un message
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 2: Rendez-vous -->
+        <div class="col-md-4">
+            <div class="card contact-card shadow-sm">
+                <div class="contact-card-header">
+                    <i class="fas fa-calendar-alt contact-icon"></i>
+                    <h3>Rendez-vous</h3>
+                </div>
+                <div class="card-body p-4">
+                    <p>Prenez directement rendez-vous en ligne selon nos disponibilités dans notre agenda.</p>
+                    <a href="{{ path('calendar') }}" class="btn btn-primary w-100">Prendre rendez-vous</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 3: Chat en direct -->
+        <div class="col-md-4">
+            <div class="card contact-card shadow-sm">
+                <div class="contact-card-header">
+                    <i class="fas fa-comments contact-icon"></i>
+                    <h3>Chat en direct</h3>
+                </div>
+                <div class="card-body p-4">
+                    <p>Discutez immédiatement avec l'un de nos conseillers disponibles via notre messagerie instantanée.</p>
+                    <button id="contact-page-chat-btn" class="btn btn-primary w-100 chat-trigger">Démarrer un chat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Informations de contact supplémentaires -->
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <h3>Coordonnées</h3>
+            <hr>
+            <p><i class="fas fa-map-marker-alt me-2"></i> 123 Avenue Example, 75000 Paris</p>
+            <p><i class="fas fa-phone me-2"></i> +33 1 23 45 67 89</p>
+            <p><i class="fas fa-envelope me-2"></i> contact@example.com</p>
+            <p><i class="fas fa-clock me-2"></i> Lundi-Vendredi: 9h-18h</p>
+        </div>
+        <div class="col-md-6">
+            
+        </div>
+    </div>
+</div>
+
+<!-- Modal du formulaire de contact -->
+<div class="modal fade" id="contactFormModal" tabindex="-1" aria-labelledby="contactFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="contactFormModalLabel">Envoyez-nous un message</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <div class="modal-body">
+                <form id="contact-form" action="{{ path('contact_send') }}" method="post" class="contact-form">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="nom" class="form-label">Nom</label>
+                                <input type="text" class="form-control" id="nom" name="nom" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="sujet" class="form-label">Sujet</label>
+                        <input type="text" class="form-control" id="sujet" name="sujet" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="rgpd" name="rgpd" required>
+                        <label class="form-check-label" for="rgpd">
+                            J'accepte que mes données soient traitées selon la politique de confidentialité.
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="submit" form="contact-form" class="btn btn-primary">Envoyer</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des réservations{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1>Gestion des réservations</h1>
+                <div>
+                    <span class="badge bg-primary">{{ bookings|length }} réservation(s)</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    {% if bookings is empty %}
+                        <div class="text-center py-5">
+                            <i class="fas fa-calendar-times fa-3x text-muted mb-3"></i>
+                            <h4>Aucune réservation</h4>
+                            <p class="text-muted">Il n'y a pas encore de réservations</p>
+                        </div>
+                    {% else %}
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Client</th>
+                                        <th>Service</th>
+                                        <th>Date/Heure</th>
+                                        <th>Durée</th>
+                                        <th>Prix</th>
+                                        <th>Statut</th>
+                                        <th>Créé le</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for booking in bookings %}
+                                        <tr class="{{ booking.isPaid ? 'table-success' : 'table-warning' }}">
+                                            <td>
+                                                <code>{{ booking.bookingToken|slice(0, 8) }}...</code>
+                                            </td>
+                                            <td>
+                                                <i class="fas fa-user-secret text-muted"></i>
+                                                {{ booking.clientSurname }}
+                                            </td>
+                                            <td>{{ booking.rdv.name }}</td>
+                                            <td>
+                                                <strong>{{ booking.beginAt|date('d/m/Y') }}</strong><br>
+                                                <small class="text-muted">{{ booking.beginAt|date('H:i') }}</small>
+                                            </td>
+                                            <td>{{ booking.rdv.duration }} min</td>
+                                            <td>{{ booking.rdv.price }}€</td>
+                                            <td>
+                                                <span class="badge bg-{{ booking.isPaid ? 'success' : 'warning' }}">
+                                                    {{ booking.isPaid ? 'Payé' : 'En attente' }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                {{ booking.createdAt|date('d/m/Y H:i') }}
+                                            </td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm">
+                                                    <form method="post" action="{{ path('admin_toggle_payment', {'id': booking.id}) }}" class="d-inline">
+                                                        <button type="submit" class="btn btn-{{ booking.isPaid ? 'warning' : 'success' }}" 
+                                                                title="{{ booking.isPaid ? 'Marquer comme non payé' : 'Marquer comme payé' }}">
+                                                            <i class="fas fa-{{ booking.isPaid ? 'times' : 'check' }}"></i>
+                                                        </button>
+                                                    </form>
+                                                    
+                                                    <form method="post" action="{{ path('admin_delete_booking', {'id': booking.id}) }}" 
+                                                          class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?')">
+                                                        <button type="submit" class="btn btn-danger" title="Supprimer">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{
+    auto_https off
+    admin off
+}
+
+:3000 {
+    log {
+        format console
+    }
+
+    route {
+        mercure {
+            publisher_jwt !ChangeThisMercureHubJWTSecretKey!
+            subscriber_jwt !ChangeThisMercureHubJWTSecretKey!
+            cors_origins *
+            publish_origins * # Ajout de cette ligne
+            anonymous # Facilite le debugging
+            subscriptions
+            ui
+        }
+        respond "Mercure is up and running" 200
+    }
+}

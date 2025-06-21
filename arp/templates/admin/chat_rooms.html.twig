@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chat Rooms{% endblock %}
+
+{% block body %}
+<h1>Espaces chat privé</h1>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Créé le</th>
+            <th>Accés direct</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for room in rooms %}
+            <tr>
+                <td>{{ room.id }}</td>
+                <td>{{ room.name }}</td>
+                <td>
+                    {# If you have a createdAt property, otherwise remove this column #}
+                    {{ room.createdAt ? room.createdAt|date('Y-m-d H:i') : '' }}
+                </td>
+                <td>
+                    <a href="{{ path('chat_private', {'roomId': room.id}) }}">Accéder au chat privé</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Pas de chat privé trouvé.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation confirmée{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4><i class="fas fa-check-circle"></i> Réservation confirmée</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle"></i>
+                        <strong>Paiement réussi!</strong>
+                        <br><small>Votre réservation a été confirmée avec succès.</small>
+                    </div>
+                    
+                    <h5>Détails de votre rendez-vous:</h5>
+                    <ul class="list-unstyled">
+                        <li><strong>Référence:</strong> {{ bookedRdv.id }}</li>
+                        <li><strong>Nom:</strong> {{ bookedRdv.clientSurname }}</li>
+                        <li><strong>Type:</strong> {{ rdv.name }}</li>
+                        <li><strong>Date et heure:</strong> {{ bookedRdv.beginAt|date('d/m/Y à H:i') }}</li>
+                        <li><strong>Durée:</strong> {{ rdv.duration }} minutes</li>
+                        <li><strong>Prix:</strong> {{ rdv.price }}€</li>
+                        <li><strong>Statut:</strong> 
+                            <span class="badge bg-success">Payé</span>
+                        </li>
+                        <li><strong>Code de réservation:</strong> {{ bookedRdv.bookingToken }}</li>
+                    </ul>
+                    
+                    <div class="mt-4">
+                        <a href="{{ path('calendar') }}" class="btn btn-primary">Retour à l'accueil</a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Store booking info in localStorage for future reference
+localStorage.setItem('rdv_booking_token', {{ bookingData|raw }});
+</script>
+{% endblock %}
